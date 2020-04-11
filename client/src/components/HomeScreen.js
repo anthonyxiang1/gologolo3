@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import '../App.css';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
@@ -26,21 +25,24 @@ class HomeScreen extends Component {
                     return (
                         <div className="container row">
                             <div className="col s4">
-                                <h3>Recent Work</h3>
+                                <div id="recent_work_container">
+                                    <h3>Recent Work</h3>
+                                </div>
+
+                                <div id="home_recent_work_list">
                                 {data.logos.map((logo, index) => (
-                                    <div key={index} className='home_logo_link'
-                                        style={{ cursor: "pointer" }}>
-                                        <Link to={`/view/${logo._id}`}>{logo.text}</Link>
+                                    <div key={index} className='home_logo_link'>
+                                        <a href={`/view/${logo._id}`} class="btn btn-info btn-small">{logo.text}</a>
                                     </div>
                                 ))}
+                                </div>
                             </div>
                             <div className="col s8">
                                 <div id="home_banner_container">
-                                    @todo<br />
-                                    List Maker
+                                    GoLogoLo
                                 </div>
-                                <div>
-                                    <Link id="add_logo_button" to="/create">Add Logo</Link>
+                                <div id="create_button">
+                                <a href="/create"  class="btn btn-primary btn-large">Create New Logo</a>
                                 </div>
                             </div>
                         </div>

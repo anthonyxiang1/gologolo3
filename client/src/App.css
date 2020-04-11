@@ -20,14 +20,39 @@ body {
 
 #home_banner_container {
   background-image: linear-gradient(to bottom,         
-  #b8b808, #636723);
+  #2bb0d1, #0d5764);
   color: white;
+  text-align: center;
   font-size: 48pt;
   border-color: black;
   border-width: 2px;
   border-style: solid;
   border-radius: 10px;
-  padding-left: 10%;
   padding-top: 5%;
   padding-bottom: 5%;
+  margin: 30px;
+}
+
+#create_button {
+  text-align: center;
+}
+
+#home_recent_work_list {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#recent_work_container {
+  background-image: linear-gradient(to bottom,         
+  #2b2ed1, #200d64);
+  color: white;
+  text-align: center;
+  font-size: 24pt;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin-top: 30px;
 }
