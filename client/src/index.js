@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 // THESE ARE OUR REACT SCREENS, WHICH WE WILL ROUTE HERE
 import HomeScreen from './components/HomeScreen';
 import EditLogoScreen from './components/EditLogoScreen';
+import EditScreen from './components/edit_screen/EditScreen';
 import CreateLogoScreen from './components/CreateLogoScreen';
 import ViewLogoScreen from './components/ViewLogoScreen';
 
@@ -21,6 +22,7 @@ ReactDOM.render(
                 <Route exact path='/' component={HomeScreen} />
                 <Route path='/edit/:id' component={EditLogoScreen} />
                 <Route path='/create' component={CreateLogoScreen} />
+                <Route path="/create2" component={EditScreen} />
                 <Route path='/view/:id' component={ViewLogoScreen} />
             </div>
         </Router>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import gql from 'graphql-tag';
+import {Link} from 'react-router-dom';
 import { Query } from 'react-apollo';
 
 const GET_LOGOS = gql`
@@ -31,8 +32,8 @@ class HomeScreen extends Component {
 
                                 <div id="home_recent_work_list">
                                 {data.logos.map((logo, index) => (
-                                    <div key={index} className='home_logo_link'>
-                                        <a href={`/view/${logo._id}`} class="btn btn-info btn-small">{logo.text}</a>
+                                    <div key={index} id='home_logo_link'>
+                                        <Link to={`/view/${logo._id}`} style={{ textDecoration: 'none' }}>{logo.text}</Link>
                                     </div>
                                 ))}
                                 </div>
@@ -42,7 +43,7 @@ class HomeScreen extends Component {
                                     GoLogoLo
                                 </div>
                                 <div id="create_button">
-                                <a href="/create"  class="btn btn-primary btn-large">Create New Logo</a>
+                                <a href="/create"  class="btn btn-primary">Create New Logo</a>
                                 </div>
                             </div>
                         </div>

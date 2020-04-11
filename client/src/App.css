@@ -18,6 +18,11 @@ body {
   font-family: 'Lexend Exa';
 }
 
+a {
+  color: rgb(255, 255, 255);
+}
+
+
 #home_banner_container {
   background-image: linear-gradient(to bottom,         
   #2bb0d1, #0d5764);
@@ -55,4 +60,16 @@ body {
   padding-top: 5%;
   padding-bottom: 5%;
   margin-top: 30px;
+}
+
+#home_logo_link {
+  background-image: linear-gradient(to bottom,         
+  #a3a4e7, #5d508d);
+  color: white;
+  text-align: center;
+  font-size: 15pt;
+  border-style: solid;
+  border-radius: 10px;
+  margin: 5px;
+  cursor: "pointer";
 }
