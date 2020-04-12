@@ -18,9 +18,6 @@ body {
   font-family: 'Lexend Exa';
 }
 
-a {
-  color: rgb(255, 255, 255);
-}
 
 
 #home_banner_container {
@@ -62,14 +59,26 @@ a {
   margin-top: 30px;
 }
 
+#links {
+  margin: 10px
+}
+
 #home_logo_link {
   background-image: linear-gradient(to bottom,         
-  #a3a4e7, #5d508d);
-  color: white;
+  #9272c4, #6333a1);
+  color: rgb(179, 208, 231);
   text-align: center;
   font-size: 15pt;
   border-style: solid;
   border-radius: 10px;
-  margin: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 10px;
   cursor: "pointer";
+}
+
+#home_logo_link:hover {
+  color: rgb(255, 255, 255);
 }

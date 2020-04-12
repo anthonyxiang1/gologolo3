@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import gql from 'graphql-tag';
-import {Link} from 'react-router-dom';
 import { Query } from 'react-apollo';
 
 const GET_LOGOS = gql`
@@ -17,6 +16,7 @@ const GET_LOGOS = gql`
 class HomeScreen extends Component {
 
     render() {
+
         return (
             <Query pollInterval={500} query={GET_LOGOS}>
                 {({ loading, error, data }) => {
@@ -31,9 +31,9 @@ class HomeScreen extends Component {
                                 </div>
 
                                 <div id="home_recent_work_list">
-                                {data.logos.map((logo, index) => (
-                                    <div key={index} id='home_logo_link'>
-                                        <Link to={`/view/${logo._id}`} style={{ textDecoration: 'none' }}>{logo.text}</Link>
+                                {data.logos.sort((a, b) => b.lastUpdate.toString().localeCompare(a.lastUpdate.toString())).map((logo, index) => (
+                                    <div key={index} id="links">
+                                        <a href={`/view/${logo._id}`} id='home_logo_link' style={{ textDecoration: 'none' }}>{logo.text}</a>
                                     </div>
                                 ))}
                                 </div>

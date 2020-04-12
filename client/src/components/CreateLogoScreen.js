@@ -7,11 +7,24 @@ const ADD_LOGO = gql`
     mutation AddLogo(
         $text: String!,
         $color: String!,
-        $fontSize: Int!) {
+        $fontSize: Int!,
+        $bgColor: String!,
+        $borderColor: String!,
+        $borderRadius: Int!,
+        $borderThickness: Int!,
+        $padding: Int!,
+        $margin: Int!) {
         addLogo(
             text: $text,
             color: $color,
-            fontSize: $fontSize) {
+            fontSize: $fontSize,
+            bgColor: $bgColor,
+            borderColor: $borderColor,
+            borderRadius: $borderRadius,
+            borderThickness: $borderThickness,
+            padding: $padding,
+            margin: $margin
+            ) {
             _id
         }
     }
@@ -35,7 +48,8 @@ class CreateLogoScreen extends Component {
                             <div className="panel-body">
                                 <form onSubmit={e => {
                                     e.preventDefault();
-                                    addLogo({ variables: { text: text.value, color: color.value, fontSize: parseInt(fontSize.value) } });
+                                    addLogo({ variables: { text: text.value, color: color.value, fontSize: parseInt(fontSize.value), bgColor: '#00000', borderColor: '#000000', 
+                                            borderRadius: 100, borderThickness: 12, padding: 50, margin: 2 } });
                                     text.value = "";
                                     color.value = "";
                                     fontSize.value = "";

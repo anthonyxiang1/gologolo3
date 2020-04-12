@@ -29,13 +29,7 @@ class Navbar extends React.Component {
           <Modal header="Are you sure you want to delete this logo?" trigger={<Button style={ {cursor: "pointer", marginRight: "5px"} }>&#128465;</Button>}>
             <Button style={ {cursor: "pointer"} } onClick={this.deleteTest}>Yes</Button>
           </Modal>
-
-          
-            
           </ul>
-
-          
-          
         </div>
         
       </nav>

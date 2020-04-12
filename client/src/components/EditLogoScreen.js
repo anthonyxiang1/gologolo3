@@ -10,6 +10,13 @@ const GET_LOGO = gql`
             text
             color
             fontSize
+            bgColor
+            borderColor
+            borderRadius
+            borderThickness
+            padding
+            margin
+            lastUpdate
         }
     }
 `;
@@ -19,12 +26,24 @@ const UPDATE_LOGO = gql`
         $id: String!,
         $text: String!,
         $color: String!,
-        $fontSize: Int!) {
+        $fontSize: Int!,
+        $bgColor: String!,
+        $borderColor: String!,
+        $borderRadius: Int!,
+        $borderThickness: Int!,
+        $padding: Int!,
+        $margin: Int!) {
             updateLogo(
                 id: $id,
                 text: $text,
                 color: $color,
-                fontSize: $fontSize) {
+                fontSize: $fontSize,
+                bgColor: $bgColor,
+                borderColor: $borderColor,
+                borderRadius: $borderRadius,
+                borderThickness: $borderThickness,
+                padding: $padding,
+                margin: $margin) {
                     lastUpdate
                 }
         }
@@ -54,7 +73,8 @@ class EditLogoScreen extends Component {
                                         <div className="panel-body">                                            
                                             <form onSubmit={e => {
                                                 e.preventDefault();
-                                                updateLogo({ variables: { id: data.logo._id, text: text.value, color: color.value, fontSize: parseInt(fontSize.value) } });
+                                                updateLogo({ variables: { id: data.logo._id, text: text.value, color: color.value, fontSize: parseInt(fontSize.value), bgColor: '#00000', borderColor: '#000000', 
+                                                borderRadius: 100, borderThickness: 12, padding: 50, margin: 2 } });
                                                 text.value = "";
                                                 color.value = "";
                                                 fontSize.value = "";
