@@ -42,8 +42,9 @@ class HomeScreen extends Component {
                                 <div id="home_banner_container">
                                     GoLogoLo
                                 </div>
+                                
                                 <div id="create_button">
-                                <a href="/create"  class="btn btn-primary">Create New Logo</a>
+                                <a href="/create"  className="btn btn-primary">Create New Logo</a>
                                 </div>
                             </div>
                         </div>

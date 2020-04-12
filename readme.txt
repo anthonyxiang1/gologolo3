@@ -60,10 +60,10 @@ mutation{
 mutation{
   addLogo (
     text : "sample3",
-    color : "#00000",
+    color : "#000000",
     fontSize : 24,
-    bgColor : "#00000",
-    borderColor: "#00000",
+    bgColor : "#6333a1",
+    borderColor: "#000000",
     borderRadius : 12,
     borderThickness : 0,
     padding : 10,
@@ -89,10 +89,10 @@ mutation{
   updateLogo (
     id : "5e9354d51ca45d1ed4e0a20e",
     text : "sample4",
-    color : "#00000",
+    color : "#000000",
     fontSize : 1000,
-    bgColor : "#00000",
-    borderColor: "#00000",
+    bgColor : "#6333a1",
+    borderColor: "#000000",
     borderRadius : 12,
     borderThickness : 0,
     padding : 10,

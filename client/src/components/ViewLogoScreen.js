@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import gql from 'graphql-tag';
 import { Query, Mutation } from 'react-apollo';
-import Navbar from './edit_screen/Navbar.js'
+import NavbarNorm from './create_screen/NavbarNorm.js'
 
 const GET_LOGO = gql`
     query logo($logoId: String) {
@@ -34,33 +34,44 @@ const DELETE_LOGO = gql`
 class ViewLogoScreen extends Component {
 
     render() {
+        
         return (
             <Query pollInterval={500} query={GET_LOGO} variables={{ logoId: this.props.match.params.id }}>
                 {({ loading, error, data }) => {
                     if (loading) return 'Loading...';
                     if (error) return `Error! ${error.message}`;
 
+                    const styles = {
+                        container: {
+                            color: data.logo.color,
+                            fontSize: data.logo.fontSize + "pt",
+                            backgroundColor: data.logo.bgColor,
+                            borderRadius: data.logo.borderRadius + "px",
+                            border: data.logo.borderThickness + "px solid " + data.logo.borderColor,
+                            padding: data.logo.padding + "px",
+                            margin: data.logo.margin + "px"
+                        }
+                    }
+                    
                     return (
                         <div className="container">
-                            <div className="panel panel-default">
                                 <div className="panel-heading">
-                                    <Navbar/>
-                                    <h3 className="panel-title">
-                                        View Logo
-                                    </h3>
+                                    <NavbarNorm/>
                                 </div>
-                                <div className="panel-body">
+
+                            <div className="row">
+                                <div id="leftside">
                                     <dl>
                                         <dt>Text:</dt>
                                         <dd>{data.logo.text}</dd>
                                         <dt>Color:</dt>
-                                        <dd>{data.logo.color}</dd>
+                                        <div class="box" style={{background: data.logo.color}}></div>
                                         <dt>Font Size:</dt>
                                         <dd>{data.logo.fontSize}</dd>
                                         <dt>Background Color:</dt>
-                                        <dd>{data.logo.bgColor}</dd>
+                                        <div class="box" style={{background: data.logo.bgColor}}></div>
                                         <dt>Border Color:</dt>
-                                        <dd>{data.logo.borderColor}</dd>
+                                        <div class="box" style={{background: data.logo.borderColor}}></div>
                                         <dt>Border Radius:</dt>
                                         <dd>{data.logo.borderRadius}</dd>
                                         <dt>Border Thickness:</dt>
@@ -88,6 +99,12 @@ class ViewLogoScreen extends Component {
                                             </div>
                                         )}
                                     </Mutation>
+                                </div>
+
+                                <div style={{ overflow: 'auto'}}>
+                                    <div style={ styles.container }>
+                                        {data.logo.text}
+                                    </div>
                                 </div>
                             </div>
                         </div>
