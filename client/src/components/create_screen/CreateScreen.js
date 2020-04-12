@@ -5,21 +5,6 @@ import NavbarNorm from './NavbarNorm.js'
 import TextCreateSidebar from './TextCreateSidebar.js'
 
 export class CreateScreen extends Component {
-    constructor(props) {
-        super(props);
-
-        // DISPLAY WHERE WE ARE
-        //console.log("\tEditScreen constructor");
-        
-    }
-
-    componentDidMount = () => {
-        //console.log("\tEditScreen component did mount");
-    }
-
-    componentWillUnmount = () => {
-        //console.log("\tEditScreen component will unmount");
-    }
 
     render() {
         // DISPLAY WHERE WE ARE

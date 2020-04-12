@@ -65,21 +65,21 @@ class ViewLogoScreen extends Component {
                                         <dt>Text:</dt>
                                         <dd>{data.logo.text}</dd>
                                         <dt>Color:</dt>
-                                        <div class="box" style={{background: data.logo.color}}></div>
+                                        <div className="box" style={{background: data.logo.color}}></div>
                                         <dt>Font Size:</dt>
-                                        <dd>{data.logo.fontSize}</dd>
+                                        <dd>{data.logo.fontSize} pt</dd>
                                         <dt>Background Color:</dt>
-                                        <div class="box" style={{background: data.logo.bgColor}}></div>
+                                        <div className="box" style={{background: data.logo.bgColor}}></div>
                                         <dt>Border Color:</dt>
-                                        <div class="box" style={{background: data.logo.borderColor}}></div>
+                                        <div className="box" style={{background: data.logo.borderColor}}></div>
                                         <dt>Border Radius:</dt>
-                                        <dd>{data.logo.borderRadius}</dd>
+                                        <dd>{data.logo.borderRadius} px</dd>
                                         <dt>Border Thickness:</dt>
-                                        <dd>{data.logo.borderThickness}</dd>
+                                        <dd>{data.logo.borderThickness} px</dd>
                                         <dt>Padding:</dt>
-                                        <dd>{data.logo.padding}</dd>
+                                        <dd>{data.logo.padding} px</dd>
                                         <dt>Margin:</dt>
-                                        <dd>{data.logo.margin}</dd>
+                                        <dd>{data.logo.margin} px</dd>
                                         <dt>Last Updated:</dt>
                                         <dd>{data.logo.lastUpdate}</dd>
                                     </dl>

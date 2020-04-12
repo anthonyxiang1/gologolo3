@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Range, Button} from 'react-materialize'
+import { withRouter } from 'react-router';
 import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
 
@@ -46,7 +47,7 @@ class TextCreateSidebar extends Component {
             borderThickness : 5,
             padding : 0,
             margin : 0,
-            emptyText: true,
+            emptyText: false,
             deleteModalVisible: false,
         }
     }
@@ -104,7 +105,12 @@ class TextCreateSidebar extends Component {
     // }
 
     handleTextChange = (event) => {
-        this.setState({ text: event.target.value });
+        if (event.target.value === "") {
+            this.setState({ text: event.target.value, emptyText : true});
+        }
+        else {
+        this.setState({ text: event.target.value, emptyText: false });
+        }
     }
 
     handleTextColorChange = (event) => {
@@ -165,7 +171,7 @@ class TextCreateSidebar extends Component {
         // if (undoDisabled)
         //     undoClass += " disabled";
         return (
-            <Mutation mutation={ADD_LOGO} onCompleted={() => this.props.history.push('/')}>
+            <Mutation mutation={ADD_LOGO} onCompleted={(data) => this.props.history.push('/view/' + data.addLogo._id)}>
                 {(addLogo, { loading, error }) => (
             <div className="col">
             <div className="card-panel col s4">
@@ -184,7 +190,7 @@ class TextCreateSidebar extends Component {
                     <div style={{paddingTop: '10', paddingBottom: '0'}} className="card-content white-text">
 
                         <div>
-                            <Button className="btn-success" style={ {cursor: "pointer"} }  onClick={e => {
+                            <Button className="btn-success" style={ {cursor: "pointer"} } disabled={this.state.emptyText}  onClick={e => {
                                     e.preventDefault();
                                     addLogo({ variables: { text: this.state.text, color: this.state.textColor, fontSize: parseInt(this.state.fontSize), 
                                         bgColor: this.state.bgColor, borderColor: this.state.borderColor, 
@@ -317,4 +323,4 @@ class TextCreateSidebar extends Component {
     }
 }
 
-export default TextCreateSidebar
+export default withRouter(TextCreateSidebar)
