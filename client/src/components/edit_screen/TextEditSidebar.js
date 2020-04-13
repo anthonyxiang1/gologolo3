@@ -54,8 +54,6 @@ class TextEditSidebar extends Component {
     constructor(props) {
         super(props);
 
-        // WE'LL MANAGE THE UI CONTROL
-        // VALUES HERE
         this.state = {
             id: "",
             text: "",
@@ -88,10 +86,8 @@ class TextEditSidebar extends Component {
     //     }
     // }
 
-    componentDidMount = () => {
-      
-        
-    }
+    // componentDidMount = () => {
+    // }
 
     // componentWillUnmount = () => {
     //     document.removeEventListener('keydown',this.handleKeyPress)
@@ -126,15 +122,15 @@ class TextEditSidebar extends Component {
 
     handleTextChange = (event) => {
         if (event.target.value === "") {
-            this.setState({ text: event.target.value, emptyText : true});
+            this.setState({ text: event.target.value, emptyText : true}, this.completeUserEditing);
         }
         else {
-        this.setState({ text: event.target.value, emptyText: false });
+        this.setState({ text: event.target.value, emptyText: false }, this.completeUserEditing);
         }
     }
 
     handleTextColorChange = (event) => {
-        this.setState({ textColor: event.target.value });
+        this.setState({ textColor: event.target.value }, this.completeUserEditing);
     }
 
     handleFontSizeChange = (event) => {
@@ -166,7 +162,6 @@ class TextEditSidebar extends Component {
     }
 
     completeUserEditing = () => {
-        console.log(this.state)
     }
 
     render() {
@@ -214,7 +209,7 @@ class TextEditSidebar extends Component {
                             this.setState({ emptyText : false})
                         }
                     }
-                    
+                    console.log(this.state.borderRadius)
         return (
             <Mutation mutation={UPDATE_LOGO} onCompleted={(data) => this.props.history.push('/view/' + this.state.id)}>
                 {(updateLogo, { loading, error }) => (
