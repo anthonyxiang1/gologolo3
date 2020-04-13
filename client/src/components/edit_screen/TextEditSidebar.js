@@ -2,10 +2,29 @@ import React, { Component } from 'react';
 import {Range, Button} from 'react-materialize'
 import { withRouter } from 'react-router';
 import gql from "graphql-tag";
-import { Mutation } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 
-const ADD_LOGO = gql`
-    mutation AddLogo(
+const GET_LOGO = gql`
+    query logo($logoId: String) {
+        logo(id: $logoId) {
+            _id
+            text
+            color
+            fontSize
+            bgColor
+            borderColor
+            borderRadius
+            borderThickness
+            padding
+            margin
+            lastUpdate
+        }
+    }
+`;
+
+const UPDATE_LOGO = gql`
+    mutation updateLogo(
+        $id: String!,
         $text: String!,
         $color: String!,
         $fontSize: Int!,
@@ -15,40 +34,41 @@ const ADD_LOGO = gql`
         $borderThickness: Int!,
         $padding: Int!,
         $margin: Int!) {
-        addLogo(
-            text: $text,
-            color: $color,
-            fontSize: $fontSize,
-            bgColor: $bgColor,
-            borderColor: $borderColor,
-            borderRadius: $borderRadius,
-            borderThickness: $borderThickness,
-            padding: $padding,
-            margin: $margin
-            ) {
-            _id
+            updateLogo(
+                id: $id,
+                text: $text,
+                color: $color,
+                fontSize: $fontSize,
+                bgColor: $bgColor,
+                borderColor: $borderColor,
+                borderRadius: $borderRadius,
+                borderThickness: $borderThickness,
+                padding: $padding,
+                margin: $margin) {
+                    lastUpdate
+                }
         }
-    }
 `;
 
-class TextCreateSidebar extends Component {
+class TextEditSidebar extends Component {
     constructor(props) {
         super(props);
 
         // WE'LL MANAGE THE UI CONTROL
         // VALUES HERE
         this.state = {
-            text: 'Sample',
-            textColor : "#3647e4",
-            fontSize : 24,
-            bgColor : "#b7c9f7",
-            borderColor : "#bb68cc",
+            id: "",
+            text: "",
+            textColor : "",
+            fontSize : 0,
+            bgColor : "",
+            borderColor : "",
             borderRadius : 0,
-            borderThickness : 5,
+            borderThickness : 0,
             padding : 0,
             margin : 0,
-            emptyText: false,
-            deleteModalVisible: false,
+            emptyText: true,
+            firstTime: true,
         }
     }
 
@@ -68,10 +88,10 @@ class TextCreateSidebar extends Component {
     //     }
     // }
 
-    // componentDidMount = () => {
-    //     //console.log("\tEditScreen component did mount");
-    //     document.addEventListener('keydown',this.handleKeyPress)
-    // }
+    componentDidMount = () => {
+      
+        
+    }
 
     // componentWillUnmount = () => {
     //     document.removeEventListener('keydown',this.handleKeyPress)
@@ -150,7 +170,7 @@ class TextCreateSidebar extends Component {
     }
 
     render() {
-
+        
         const styles = {
             container: {
                 color: this.state.textColor,
@@ -170,9 +190,34 @@ class TextCreateSidebar extends Component {
         //     redoClass += " disabled";
         // if (undoDisabled)
         //     undoClass += " disabled";
+
         return (
-            <Mutation mutation={ADD_LOGO} onCompleted={(data) => this.props.history.push('/view/' + data.addLogo._id)}>
-                {(addLogo, { loading, error }) => (
+            <Query query={GET_LOGO} variables={{ logoId: this.props.match.params.id }}>
+                {({ loading, error, data }) => {
+                    if (loading) return 'Loading...';
+                    if (error) return `Error! ${error.message}`;
+                    if (this.state.firstTime) {
+                        this.setState({ 
+                            id: data.logo._id,
+                            text: data.logo.text,
+                            textColor : data.logo.color,
+                            fontSize : data.logo.fontSize,
+                            bgColor : data.logo.bgColor,
+                            borderColor : data.logo.borderColor,
+                            borderRadius : data.logo.borderRadius,
+                            borderThickness : data.logo.borderThickness,
+                            padding : data.logo.padding,
+                            margin : data.logo.margin,
+                            firstTime : false
+                        });
+                        if (data.logo.text !== "") {
+                            this.setState({ emptyText : false})
+                        }
+                    }
+                    
+        return (
+            <Mutation mutation={UPDATE_LOGO} onCompleted={(data) => this.props.history.push('/view/' + this.state.id)}>
+                {(updateLogo, { loading, error }) => (
             <div className="col">
             <div className="card-panel col s4">
                 <div className="card blue-grey darken-1">
@@ -185,31 +230,33 @@ class TextCreateSidebar extends Component {
                         
                         {/* <button className={undoClass} onClick={this.handleUndo}>Undo</button>
                         <button className={redoClass} onClick={this.handleRedo}>Redo</button> */}
-                    <div className="submit">
+                    
+
+                    <div style={{paddingTop: '10', paddingBottom: '0'}} className="card-content white-text">
+
+                        <div>
                             <Button className="btn-success" style={ {cursor: "pointer"} } disabled={this.state.emptyText}  onClick={e => {
                                     e.preventDefault();
-                                    addLogo({ variables: { text: this.state.text, color: this.state.textColor, fontSize: parseInt(this.state.fontSize), 
+                                    updateLogo({ variables: { id: this.state.id, text: this.state.text, color: this.state.textColor, fontSize: parseInt(this.state.fontSize), 
                                         bgColor: this.state.bgColor, borderColor: this.state.borderColor, 
                                         borderRadius: parseInt(this.state.borderRadius), borderThickness: parseInt(this.state.borderThickness), 
                                         padding: parseInt(this.state.padding), margin: parseInt(this.state.margin) } });
-                                    this.setState({ 
-                                        text: 'Sample',
-                                        textColor : "#3647e4",
-                                        fontSize : 24,
-                                        bgColor : "#b7c9f7",
-                                        borderColor : "#bb68cc",
-                                        borderRadius : 0,
-                                        borderThickness : 5,
-                                        padding : 0,
-                                        margin : 0
+                                    // this.setState({ 
+                                    //     text: 'Sample',
+                                    //     textColor : "#3647e4",
+                                    //     fontSize : 24,
+                                    //     bgColor : "#b7c9f7",
+                                    //     borderColor : "#bb68cc",
+                                    //     borderRadius : 0,
+                                    //     borderThickness : 5,
+                                    //     padding : 0,
+                                    //     margin : 0
 
-                                    });
+                                    // });
                                 }}>
-                                    Submit</Button>
+                                    Update</Button>
                         </div>
 
-                    <div style={{paddingTop: '5', paddingBottom: '0'}} className="card-content white-text">
-                        
                         <span className="card-title">Text</span>
 
                         <div className="row">
@@ -307,7 +354,7 @@ class TextCreateSidebar extends Component {
             </div>
 
             <div className="col s8" style={{overflow: 'auto'}}>
-                <div style={{display: 'inline-block'}}>
+                <div style={{display: 'inline-block', paddingTop: '5px'}}>
                 <div style={ styles.container}>
                     {this.state.text}
                 </div>
@@ -318,7 +365,10 @@ class TextCreateSidebar extends Component {
             )}
             </Mutation>
         )
+    }}
+    </Query>
+    );
     }
 }
 
-export default withRouter(TextCreateSidebar)
+export default withRouter(TextEditSidebar)

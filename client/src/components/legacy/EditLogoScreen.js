@@ -62,6 +62,7 @@ class EditLogoScreen extends Component {
                     return (
                         <Mutation mutation={UPDATE_LOGO} key={data.logo._id} onCompleted={() => this.props.history.push(`/`)}>
                             {(updateLogo, { loading, error }) => (
+                                
                                 <div className="container">
                                     <div className="panel panel-default">
                                         <div className="panel-heading">
