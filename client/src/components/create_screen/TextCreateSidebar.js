@@ -52,58 +52,6 @@ class TextCreateSidebar extends Component {
         }
     }
 
-    // componentDidUpdate = (prevProps) => {
-    //     if (this.props !== prevProps){
-    //         this.setState({
-    //             text: this.props.logo.text,
-    //             textColor : this.props.logo.textColor,
-    //             fontSize : this.props.logo.fontSize,
-    //             bgColor : this.props.logo.bgColor,
-    //             borderColor : this.props.logo.borderColor,
-    //             borderRadius : this.props.logo.borderRadius,
-    //             borderThickness : this.props.logo.borderThickness,
-    //             padding : this.props.logo.padding,
-    //             margin : this.props.logo.margin,
-    //         })
-    //     }
-    // }
-
-    // componentDidMount = () => {
-    //     //console.log("\tEditScreen component did mount");
-    //     document.addEventListener('keydown',this.handleKeyPress)
-    // }
-
-    // componentWillUnmount = () => {
-    //     document.removeEventListener('keydown',this.handleKeyPress)
-    // }
-
-    // handleKeyPress = (event) => {
-    //     var evtobj = window.event? event : event
-    //     if (evtobj.keyCode === 90 && evtobj.ctrlKey){
-    //         this.setState(this.handleUndo)
-    //         }
-    //     if (evtobj.keyCode === 89 && evtobj.ctrlKey){
-    //         this.setState(this.handleRedo)
-    //     }
-    // }
-
-    // handleUndo = () => {
-    //     this.props.undoCallback();
-    // }
-
-    // handleRedo = () => {
-    //     this.props.redoCallback();
-    // }
-
-    // handleEdit = () => {
-    //     var regex = "^\\s*$"
-    //     console.log(this.state)
-    //     if (this.state.temptext.match(regex))
-    //         console.log("INVALID INPUT")
-    //     else
-    //         this.setState({ text: this.state.temptext });
-    // }
-
     handleTextChange = (event) => {
         if (event.target.value === "") {
             this.setState({ text: event.target.value, emptyText : true});
@@ -150,7 +98,6 @@ class TextCreateSidebar extends Component {
     }
 
     render() {
-
         const styles = {
             container: {
                 color: this.state.textColor,
@@ -162,29 +109,13 @@ class TextCreateSidebar extends Component {
                 margin: this.state.margin + "px"
             }
         }
-        // let undoDisabled = !this.props.canUndo();
-        // let undoClass = "waves-effect waves-light btn-small";
-        // let redoDisabled = !this.props.canRedo();
-        // let redoClass = "waves-effect waves-light btn-small";
-        // if (redoDisabled)
-        //     redoClass += " disabled";
-        // if (undoDisabled)
-        //     undoClass += " disabled";
+
         return (
             <Mutation mutation={ADD_LOGO} onCompleted={(data) => this.props.history.push('/view/' + data.addLogo._id)}>
                 {(addLogo, { loading, error }) => (
             <div className="col">
             <div className="card-panel col s4">
                 <div className="card blue-grey darken-1">
-
-                        {/* <Modal header="Edit text name" trigger={<button className="waves-effect waves-light btn-small">&#9998;</button>}>
-                            <TextInput defaultValue='' onChange={this.handleTextChange}> </TextInput>
-                            <Button className="modal-close" style={ {cursor: "pointer"} }  onClick={this.handleEdit}>Confirm</Button>
-                            {this.state.temptext.match("^\\s*$") ? <span className="red-text">Logo text must be non-empty!</span> : null}
-                        </Modal> */}
-                        
-                        {/* <button className={undoClass} onClick={this.handleUndo}>Undo</button>
-                        <button className={redoClass} onClick={this.handleRedo}>Redo</button> */}
                     <div className="submit">
                             <Button className="btn-success" style={ {cursor: "pointer"} } disabled={this.state.emptyText}  onClick={e => {
                                     e.preventDefault();
@@ -300,10 +231,6 @@ class TextCreateSidebar extends Component {
                         </div>
                     </div>
                 </div>
-
-            
-
-
             </div>
 
             <div className="col s8" style={{overflow: 'auto'}}>

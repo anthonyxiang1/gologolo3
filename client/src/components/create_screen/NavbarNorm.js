@@ -2,19 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 class NavbarNorm extends React.Component {
-  constructor() {
-    super();
-    console.log("Navbar constructed");
-  }
-
-  componentDidMount = () => {
-      console.log("\tNavbar component did mount");
-  }
-
-  componentWillUnmount = () => {
-      console.log("\tNavbar component will unmount");
-  }
-
   render() {
     return (
       <nav>

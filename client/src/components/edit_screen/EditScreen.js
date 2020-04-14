@@ -13,14 +13,7 @@ export class EditScreen extends Component {
             <div className="container">
                 <NavbarNorm/>
                 <div className="row">
-                    <TextEditSidebar
-                        //logo={this.state.logo}
-                        // changeLogoCallback={this.props.changeLogoCallback}
-                        // redoCallback={this.props.redoCallback}  
-                        // undoCallback={this.props.undoCallback}        
-                        // canRedo={this.props.canRedo}                                  
-                        // canUndo={this.props.canUndo}                         
-                    />
+                    <TextEditSidebar/>
                     
                 </div> 
             </div>

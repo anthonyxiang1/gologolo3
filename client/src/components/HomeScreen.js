@@ -16,7 +16,6 @@ const GET_LOGOS = gql`
 class HomeScreen extends Component {
 
     render() {
-
         return (
             <Query pollInterval={500} query={GET_LOGOS}>
                 {({ loading, error, data }) => {
@@ -44,13 +43,12 @@ class HomeScreen extends Component {
                                 </div>
                                 
                                 <div id="create_button">
-                                <a href="/create"  className="btn btn-primary">Create New Logo</a>
+                                    <a href="/create"  className="btn btn-primary">Create New Logo</a>
                                 </div>
                             </div>
                         </div>
                     );
-                }
-                }
+                }}
             </Query >
         );
     }

@@ -70,56 +70,6 @@ class TextEditSidebar extends Component {
         }
     }
 
-    // componentDidUpdate = (prevProps) => {
-    //     if (this.props !== prevProps){
-    //         this.setState({
-    //             text: this.props.logo.text,
-    //             textColor : this.props.logo.textColor,
-    //             fontSize : this.props.logo.fontSize,
-    //             bgColor : this.props.logo.bgColor,
-    //             borderColor : this.props.logo.borderColor,
-    //             borderRadius : this.props.logo.borderRadius,
-    //             borderThickness : this.props.logo.borderThickness,
-    //             padding : this.props.logo.padding,
-    //             margin : this.props.logo.margin,
-    //         })
-    //     }
-    // }
-
-    // componentDidMount = () => {
-    // }
-
-    // componentWillUnmount = () => {
-    //     document.removeEventListener('keydown',this.handleKeyPress)
-    // }
-
-    // handleKeyPress = (event) => {
-    //     var evtobj = window.event? event : event
-    //     if (evtobj.keyCode === 90 && evtobj.ctrlKey){
-    //         this.setState(this.handleUndo)
-    //         }
-    //     if (evtobj.keyCode === 89 && evtobj.ctrlKey){
-    //         this.setState(this.handleRedo)
-    //     }
-    // }
-
-    // handleUndo = () => {
-    //     this.props.undoCallback();
-    // }
-
-    // handleRedo = () => {
-    //     this.props.redoCallback();
-    // }
-
-    // handleEdit = () => {
-    //     var regex = "^\\s*$"
-    //     console.log(this.state)
-    //     if (this.state.temptext.match(regex))
-    //         console.log("INVALID INPUT")
-    //     else
-    //         this.setState({ text: this.state.temptext });
-    // }
-
     handleTextChange = (event) => {
         if (event.target.value === "") {
             this.setState({ text: event.target.value, emptyText : true}, this.completeUserEditing);
@@ -165,7 +115,6 @@ class TextEditSidebar extends Component {
     }
 
     render() {
-        
         const styles = {
             container: {
                 color: this.state.textColor,
@@ -177,15 +126,7 @@ class TextEditSidebar extends Component {
                 margin: this.state.margin + "px"
             }
         }
-        // let undoDisabled = !this.props.canUndo();
-        // let undoClass = "waves-effect waves-light btn-small";
-        // let redoDisabled = !this.props.canRedo();
-        // let redoClass = "waves-effect waves-light btn-small";
-        // if (redoDisabled)
-        //     redoClass += " disabled";
-        // if (undoDisabled)
-        //     undoClass += " disabled";
-
+        
         return (
             <Query query={GET_LOGO} variables={{ logoId: this.props.match.params.id }}>
                 {({ loading, error, data }) => {
@@ -216,40 +157,17 @@ class TextEditSidebar extends Component {
             <div className="col">
             <div className="card-panel col s4">
                 <div className="card blue-grey darken-1">
+                    <div style={{paddingTop: '0', paddingBottom: '0'}} className="card-content white-text">
 
-                        {/* <Modal header="Edit text name" trigger={<button className="waves-effect waves-light btn-small">&#9998;</button>}>
-                            <TextInput defaultValue='' onChange={this.handleTextChange}> </TextInput>
-                            <Button className="modal-close" style={ {cursor: "pointer"} }  onClick={this.handleEdit}>Confirm</Button>
-                            {this.state.temptext.match("^\\s*$") ? <span className="red-text">Logo text must be non-empty!</span> : null}
-                        </Modal> */}
-                        
-                        {/* <button className={undoClass} onClick={this.handleUndo}>Undo</button>
-                        <button className={redoClass} onClick={this.handleRedo}>Redo</button> */}
-                    
-
-                    <div style={{paddingTop: '10', paddingBottom: '0'}} className="card-content white-text">
-
-                        <div>
+                        <div className="submit">
                             <Button className="btn-success" style={ {cursor: "pointer"} } disabled={this.state.emptyText}  onClick={e => {
                                     e.preventDefault();
                                     updateLogo({ variables: { id: this.state.id, text: this.state.text, color: this.state.textColor, fontSize: parseInt(this.state.fontSize), 
                                         bgColor: this.state.bgColor, borderColor: this.state.borderColor, 
                                         borderRadius: parseInt(this.state.borderRadius), borderThickness: parseInt(this.state.borderThickness), 
                                         padding: parseInt(this.state.padding), margin: parseInt(this.state.margin) } });
-                                    // this.setState({ 
-                                    //     text: 'Sample',
-                                    //     textColor : "#3647e4",
-                                    //     fontSize : 24,
-                                    //     bgColor : "#b7c9f7",
-                                    //     borderColor : "#bb68cc",
-                                    //     borderRadius : 0,
-                                    //     borderThickness : 5,
-                                    //     padding : 0,
-                                    //     margin : 0
-
-                                    // });
-                                }}>
-                                    Update</Button>
+                                    }}>
+                                Update</Button>
                         </div>
 
                         <span className="card-title">Text</span>
@@ -342,14 +260,10 @@ class TextEditSidebar extends Component {
                         </div>
                     </div>
                 </div>
-
-            
-
-
             </div>
 
             <div className="col s8" style={{overflow: 'auto'}}>
-                <div style={{display: 'inline-block', paddingTop: '5px'}}>
+                <div style={{display: 'inline-block'}}>
                 <div style={ styles.container}>
                     {this.state.text}
                 </div>
