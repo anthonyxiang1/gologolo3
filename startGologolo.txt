@@ -1,0 +1,12 @@
+Open VSC, locate to your root HW3 folder path.
+Create New Terminal
+run: mongod --dbpath="db"
+Create New Terminal
+run: cd server
+run: nodemon (Connection should be successful)
+Open http://localhost:3000/graphql
+Create New Terminal
+run: cd client
+run: npm start
+Would you like to run the app on another port instead? (Y/n) ,type Y
+Your project should be in: http://localhost:3001/

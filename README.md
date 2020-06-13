@@ -4,6 +4,18 @@ Logo maker CRUD app
 ## Experience
 Users can create, design, edit, and delete logos.
 
+### Home page
+
+![Alt text](home.JPG)
+
+### View page
+
+![Alt text](view.JPG)
+
+### Edit and Create page
+
+![Alt text](edit.JPG)
+
 # Technical
 ## Views
 - Home page
